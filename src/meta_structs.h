@@ -10,9 +10,9 @@ struct memcached_metadata {
 struct mysql_metadata {
   char *user,
        *host,
-       *port,
        *password,
        *database;
+  int port;
 };
 
 #endif

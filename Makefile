@@ -3,8 +3,12 @@ BUILD_DIR =./build
 INSTALL_DIR =/var/www/fcgi/app
 
 PROJECT_NAME =fcgi_redir
-PROJECT_FILES =$(SOURCE_DIR)/main.c $(SOURCE_DIR)/config_parser.c $(SOURCE_DIR)/parsing.c $(SOURCE_DIR)/fcgi_threads.c 
-DEPENDENCIES =-lfcgi -lpthread `mysql_config --cflags` `mysql_config --libs` -lmemcached -lmysqlclient
+PROJECT_FILES =$(SOURCE_DIR)/main.c $(SOURCE_DIR)/cgi_handler_thread.c \
+$(SOURCE_DIR)/advanced_string.c $(SOURCE_DIR)/cgi_query_parser.c $(SOURCE_DIR)/config_parser.c
+
+DEPENDENCIES =-lfcgi -lpthread -lmemcached -lmysqlclient \
+`mysql_config --cflags` `mysql_config --libs`
+
 GCC_OPTIONS =-std=c11 -Wall
 
 all: build_release

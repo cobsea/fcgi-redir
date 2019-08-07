@@ -5,23 +5,25 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "parsing.h"
+#include "advanced_string.h"
 
-// returns length of the buff array
 int conf_parse_file(char *path, struct conf_node **buff) {
   FILE *config_file = fopen(path, "r");
-  char *config_data = (char*)malloc(sizeof(char));
-  int conf_size = 1;
-  while(!feof(config_file)) {
-    conf_size++;
-    config_data = (char*)realloc(config_data, conf_size * sizeof(char));
-    fread(config_data + conf_size - 2, 1, 1, config_file);
+  if (config_file != NULL) {
+    char *config_data = (char*)malloc(sizeof(char));
+    int conf_size = 1;
+    while(!feof(config_file)) {
+      conf_size++;
+      config_data = (char*)realloc(config_data, conf_size * sizeof(char));
+      fread(config_data + conf_size - 2, 1, 1, config_file);
+    }
+    config_data[conf_size - 1] = '\0';
+    fclose(config_file);
+    int size = conf_parse_key_value(config_data, buff);
+    free(config_data);
+    return size;
   }
-  config_data[conf_size - 1] = '\0';
-  fclose(config_file);
-  int size = conf_parse_key_value(config_data, buff);
-  free(config_data);
-  return size;
+  return -1;
 }
 
 int conf_parse_key_value(char *str, struct conf_node **buff) {
