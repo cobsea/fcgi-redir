@@ -18,21 +18,25 @@ release: build_release install_release
 debug: build_debug install_debug
 
 build_release:
+	mkdir -p $(BUILD_DIR)
 	gcc -O2 $(GCC_OPTIONS) -o $(BUILD_DIR)/$(PROJECT_NAME) \
 $(PROJECT_FILES) \
 $(DEPENDENCIES)
 	cp -r $(SOURCE_DIR)/config $(BUILD_DIR)/
 
 build_debug:
+	mkdir -p $(BUILD_DIR)
 	gcc -g $(GCC_OPTIONS) -o $(BUILD_DIR)/$(PROJECT_NAME)_debug \
 $(PROJECT_FILES) \
 $(DEPENDENCIES)
 	cp -r $(SOURCE_DIR)/config $(BUILD_DIR)/
 
 install_release:
+	mkdir -p $(INSTALL_DIR)
 	cp $(BUILD_DIR)/$(PROJECT_NAME) $(INSTALL_DIR)/$(PROJECT_NAME)
 	cp -r $(BUILD_DIR)/config $(INSTALL_DIR)/
 
 install_debug:
+	mkdir -p $(INSTALL_DIR)
 	cp $(BUILD_DIR)/$(PROJECT_NAME)_debug $(INSTALL_DIR)/$(PROJECT_NAME)
 	cp -r $(BUILD_DIR)/config $(INSTALL_DIR)/
