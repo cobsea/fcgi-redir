@@ -86,3 +86,5 @@ http://1.2.3.4/app/fcgi_redir?username=Anil&ran=0.97584378943&pageURL=http://xyz
 ```
 
 If a database on the host contains a given username and the URL paired with this username is correct, it redirects to this URL. Otherwise it redirects to a fallback URL which is `pageURL` parameter in CGI query. The `ran` parameter is nedded to avoid browser caching. All the redirections are cached to Memcached with a configurable timeout.
+
+To shut down the application use `kill` program. After killing, FastCGI Redirector serves another one query and then shuts down.
