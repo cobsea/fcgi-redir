@@ -63,7 +63,7 @@ Made as take-home assignment.
     mysql> USE your_database_name
     mysql> source fcgi_redir_data.sql
     ```
-    If you want to work with your own database, make sure it has at least 2 columns: `name` and `url`. The first one is used for search and it represents anything after `username` in the CGI query `...?username=Anil&ran...`. The second one is the URL string which begins with `http://` or `https://` and used for primary redirection.
+    If you want to work with your own database, make sure it has a table called "pairs" and this table contains at least 2 columns: `name` and `url`. The first one is used for search and it represents anything after `username` in the CGI query `...?username=Anil&ran...`. The second one is the URL string which begins with `http://` or `https://` and used for primary redirection.
 
 1. Configure FastCGI Redirector.
 
