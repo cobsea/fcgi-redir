@@ -96,7 +96,7 @@ void *cgi_handler_thread(void *args) {
           // checking if connection is online
           if (mysql_ping(db_connection) != 0) {
             FCGX_PutS(database_connection_error_answer, request.out);
-            (log_mutex_ptr, log_file, "Coudn't reconnect to MySQL\n");
+            fprintf_threaded(log_mutex_ptr, log_file, "Coudn't reconnect to MySQL\n");
             redirection_status = 0;
           }
           else {

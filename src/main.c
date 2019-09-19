@@ -119,6 +119,9 @@ int main (int argc, char **argv) {
       }
     }
   }
+  else {
+    printf("Parenthesis issue!\n");
+  }
   conf_free_node(config, conf_size);
   // configuration is finished
 

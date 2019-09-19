@@ -60,3 +60,66 @@ bool is_url(char *str) {
 
   return true;
 }
+
+bool parenthesis_are_valid(char *str) {
+  size_t stack_size = 0;
+  char *stack = (char*)malloc(stack_size * sizeof(char));
+  bool ret = true;
+  for (char *ptr = str; *ptr != '\0'; ptr++) {
+    if (*ptr == '(' || *ptr == '[' || *ptr == '{') {
+      stack = realloc(stack, ++stack_size * sizeof(char));
+      stack[stack_size - 1] = *ptr;
+    }
+    else if (*ptr == ')') {
+      if (stack_size > 0) {
+        if (stack[stack_size - 1] == '(') {
+          stack = realloc(stack, --stack_size * sizeof(char));
+        }
+        else {
+          ret = false;
+          break;
+        }
+      }
+      else {
+        ret = false;
+        break;
+      }
+    }
+    else if (*ptr == ']') {
+      if (stack_size > 0) {
+        if (stack[stack_size - 1] == '[') {
+          stack = realloc(stack, --stack_size * sizeof(char));
+        }
+        else {
+          ret = false;
+          break;
+        }
+      }
+      else {
+        ret = false;
+        break;
+      }
+    }
+    else if (*ptr == '}') {
+      if (stack_size > 0) {
+        if (stack[stack_size - 1] == '{') {
+          stack = realloc(stack, --stack_size * sizeof(char));
+        }
+        else {
+          ret = false;
+          break;
+        }
+      }
+      else {
+        ret = false;
+        break;
+      }
+    }
+  }
+
+
+  free (stack);
+  if (stack_size > 0)
+    ret = false;
+  return ret;
+}

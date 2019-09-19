@@ -19,9 +19,12 @@ int conf_parse_file(char *path, struct conf_node **buff) {
     }
     config_data[conf_size - 1] = '\0';
     fclose(config_file);
-    int size = conf_parse_key_value(config_data, buff);
+    if (parenthesis_are_valid(config_data)) {
+      int size = conf_parse_key_value(config_data, buff);
+      free(config_data);
+      return size;
+    }
     free(config_data);
-    return size;
   }
   return -1;
 }

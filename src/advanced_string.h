@@ -32,4 +32,10 @@ int cmp_before(char *first, char f_end, char *second, char s_end);
  */
 bool is_url(char *str);
 
+/**
+ * Checks either parenthesis are valid in the null-terminated string
+ * or not.
+ */
+bool parenthesis_are_valid(char *str);
+
 #endif
