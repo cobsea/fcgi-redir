@@ -9,6 +9,7 @@
 
 int conf_parse_file(char *path, struct conf_node **buff) {
   FILE *config_file = fopen(path, "r");
+  int node_size = -1;
   if (config_file != NULL) {
     char *config_data = (char*)malloc(sizeof(char));
     int conf_size = 1;
@@ -20,13 +21,11 @@ int conf_parse_file(char *path, struct conf_node **buff) {
     config_data[conf_size - 1] = '\0';
     fclose(config_file);
     if (parenthesis_are_valid(config_data)) {
-      int size = conf_parse_key_value(config_data, buff);
-      free(config_data);
-      return size;
+      node_size = conf_parse_key_value(config_data, buff);
     }
     free(config_data);
   }
-  return -1;
+  return node_size;
 }
 
 int conf_parse_key_value(char *str, struct conf_node **buff) {

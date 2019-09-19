@@ -120,7 +120,7 @@ int main (int argc, char **argv) {
     }
   }
   else {
-    printf("Parenthesis issue!\n");
+    printf("Parenthesis are not correct in the configuration file!\n");
   }
   conf_free_node(config, conf_size);
   // configuration is finished
